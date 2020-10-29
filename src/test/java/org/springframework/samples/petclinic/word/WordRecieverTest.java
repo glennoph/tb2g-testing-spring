@@ -1,27 +1,19 @@
 package org.springframework.samples.petclinic.word;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.junit.Assert.*;
 
 
 // junit4
-@RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {BaseConfig.class, WordAConfig.class})
+@SpringJUnitConfig(classes = {BaseConfig.class, WordAConfig.class})
 public class WordRecieverTest {
+
     @Autowired
     WordReciever wordReciever;
-
-//    @Before
-//    public void setUp() throws Exception {
-//        System.out.println("WordRecieverTest");
-//        wordReciever = new WordReciever(new WordA());
-//    }
 
     @Test
     public void getWord() {
