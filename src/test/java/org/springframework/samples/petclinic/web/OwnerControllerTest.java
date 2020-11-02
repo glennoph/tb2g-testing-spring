@@ -29,15 +29,15 @@ public class OwnerControllerTest {
     @BeforeEach
     void setUp() {
         System.out.println("OwnerControllerTest");
-        mockMvc = MockMvcBuilders.standaloneSetup(ownerController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(ownerController).build(); // build mockMvc before test
     }
 
     @Test
     public void initCreationForm() throws Exception {
-        mockMvc.perform(get("/owners/new"))
-                .andExpect(status().isOk())
-                .andExpect(model().attributeExists("owner"))
-                .andExpect(view().name(ownerController.VIEWS_OWNER_CREATE_OR_UPDATE_FORM))
+        mockMvc.perform(get("/owners/new")) // get url
+                .andExpect(status().isOk()) // status ok?
+                .andExpect(model().attributeExists("owner")) // attribute owner
+                .andExpect(view().name(ownerController.VIEWS_OWNER_CREATE_OR_UPDATE_FORM)) // view name
         ;
     }
 }
