@@ -60,6 +60,25 @@ public class OwnerControllerTest {
     }
 
     @Test
+    void processCreationForm_Invalid() throws Exception {
+        // test with valid owner data
+        mockMvc.perform(post("/owners/new")
+                .param("lastName", "tovalds")
+                .param("firstName", "linus")
+                //.param("address", "123 main st")
+                //.param("city", "Helsinki")
+                //.param("telephone", "1234567890")
+                )
+                .andExpect(status().isOk()) // ok but there are errors
+                .andExpect(view().name("owners/createOrUpdateOwnerForm"))
+                .andExpect(model().attributeHasErrors("owner"))
+                .andExpect(model().attributeHasFieldErrors("owner", "address"))
+                .andExpect(model().attributeHasFieldErrors("owner", "city"))
+                .andExpect(model().attributeHasFieldErrors("owner", "telephone"))
+        ;
+    }
+
+    @Test
     public void initCreationForm() throws Exception {
         mockMvc.perform(get("/owners/new")) // get url
                 .andExpect(status().isOk()) // status ok?
