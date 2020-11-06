@@ -20,6 +20,7 @@ import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -41,6 +42,21 @@ public class OwnerControllerTest {
     void setUp() {
         System.out.println("OwnerControllerTest");
         mockMvc = MockMvcBuilders.standaloneSetup(ownerController).build(); // build mockMvc before test
+    }
+
+
+    @Test
+    void processCreationForm_Valid() throws Exception {
+        // test with valid owner data
+        mockMvc.perform(post("/owners/new")
+                .param("lastName", "tovalds")
+                .param("firstName", "linus")
+                .param("address", "123 main st")
+                .param("city", "Helsinki")
+                .param("telephone", "1234567890")
+        )
+                .andExpect(status().is3xxRedirection()) // redirect
+                .andExpect(view().name("redirect:/owners/null"));
     }
 
     @Test
